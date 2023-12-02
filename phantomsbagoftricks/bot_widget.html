@@ -1,0 +1,43 @@
+{% extends 'widgets/widget_template.html' %}
+{% load custom_template %}
+{% block custom_title_prop %}{% if title_logo %}style="background-size: auto 60%; background-position: 50%; background-repeat: no-repeat; background-image: url('/app_resource/{{ title_logo }}');"{% endif %}{% endblock %}
+{% block title1 %}{{ title1 }}{% endblock %}
+{% block title2 %}{{ title2 }}{% endblock %}
+{% block custom_tools %}
+{% endblock %}
+
+{% block widget_content %} <!-- Main Start Block -->
+
+<div>
+
+  <script id="bot-script" src="/app_resource/{{ app_path }}/bot_widget.js" type="text/javascript"></script>
+
+  <p id="bot-app-logo" hidden>/app_resource/{{ dark_title_logo }}</p>
+  <p id="bot-container-id" hidden>{{ ctx.container }}</p>
+  <p id="bot-app-name" hidden>{{ ctx.app_name }}</p> 
+  <p id="bot-app-id" hidden>{{ ctx.app }}</p> 
+  <p id="bot-app-path" hidden>{{ app_path }}</p>
+  <p id="bot-app-config" hidden>{{ app_config }}</p>
+
+  <p id="bot-action-id" hidden>{{ data.action_id }}</p>
+  <p id="bot-app-run-id" hidden>{{ data.app_run_id }}</p>
+
+  {% if data.view_name %}
+  <p id="bot-view-name" hidden>{{ data.view_name }}</p>
+  {% endif %}
+
+
+  {% if data.action_id == 'add_view' or data.action_id == 'activate_artifact_overview' %}
+    {% if data.view_name %}
+    <div id="bot-widget" viewname="{{ data.view_name }}" runid="{{ data.app_run_id }}" actionid="{{ data.action_id }}"></div>
+    {% else %}
+    <h2>Action {{ data.action_id }} must have a view name</h2>
+    {% endif %}
+  {% else %}
+  <h2>Action {{ data.action_id }} doesn't have a view!</h2>
+  {% endif %}
+
+
+</div> <!-- Main Div -->
+
+{% endblock %} <!-- Main Start Block -->

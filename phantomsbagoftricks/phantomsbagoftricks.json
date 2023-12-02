@@ -1,0 +1,904 @@
+{
+    "appid": "94618742-96f3-4d28-8c8d-0624431248da",
+    "name": "Phantoms Bag of Tricks",
+    "description": "App for improve the analyst's user experience using Widgets.",
+    "type": "siem",
+    "product_vendor": "Splunk_clone_1698853860025",
+    "logo": "phantomssoarbagoftricks.png",
+    "logo_dark": "phantomssoarbagoftricks_dark.png",
+    "product_name": "SOAR_clone_1698853860025",
+    "python_version": "3",
+    "product_version_regex": ".*",
+    "publisher": "BenniH",
+    "license": "Copyright (c) BenniH, 2023",
+    "app_version": "1.0.0",
+    "utctime_updated": "2023-11-11T07:57:10.569719Z",
+    "package_name": "phantom_phantomsbagoftricks",
+    "main_module": "phantomsbagoftricks_connector.py",
+    "min_phantom_version": "6.1.1.211",
+    "app_wizard_version": "1.0.0",
+    "configuration": {
+        "enable_button": {
+            "description": "Show Button",
+            "data_type": "boolean",
+            "required": false,
+            "default": "False",
+            "order": 0,
+            "name": "enable_button",
+            "id": 0
+        },
+        "enable_sidebar": {
+            "description": "Enable Sidebar",
+            "data_type": "boolean",
+            "required": false,
+            "default": "False",
+            "order": 1,
+            "name": "enable_sidebar",
+            "id": 1
+        }
+    },
+    "actions": [
+        {
+            "action": "test connectivity",
+            "identifier": "test_connectivity",
+            "description": "Validate the asset configuration for connectivity using supplied configuration",
+            "verbose": "",
+            "type": "test",
+            "read_only": true,
+            "parameters": {},
+            "output": [],
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "activate artifact overview",
+            "identifier": "activate_artifact_overview",
+            "description": "Activates the prefefined artifact overview.",
+            "verbose": "There is currently only one predefined view - the 'Artifact Overview' which lists the filtered artifacts and provides the ability to execute automation and input playbooks with the scope of the concerning artifact.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "playbook_tags": {
+                    "description": "List of playbook tags which should be added to summary (JSON array)",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "playbook_tags",
+                    "id": 1,
+                    "param_name": "playbook_tags"
+                },
+                "artifact_labels": {
+                    "description": "List of artifact labes which should be added to summary (JSON array)",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "artifact_labels",
+                    "id": 2,
+                    "param_name": "artifact_labels"
+                },
+                "artifact_severities": {
+                    "description": "List of artifact severities which should be included in summary (JSON array)",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "artifact_severities",
+                    "id": 3,
+                    "param_name": "artifact_severities"
+                },
+                "artifact_tags_include": {
+                    "description": "List of artifact tags which should be included in summary (JSON array)",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 3,
+                    "name": "artifact_tags_include",
+                    "id": 4,
+                    "param_name": "artifact_tags_include"
+                },
+                "artifact_tags_exclude": {
+                    "description": "List of artifact tags which should be excluded from summary (JSON array)",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 4,
+                    "name": "artifact_tags_exclude",
+                    "id": 5,
+                    "param_name": "artifact_tags_exclude"
+                },
+                "artifacts_with_playbooks_only": {
+                    "description": "Show only artifacts with playbooks",
+                    "data_type": "boolean",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "default": "",
+                    "order": 5,
+                    "name": "artifacts_with_playbooks_only",
+                    "id": 6,
+                    "param_name": "artifacts_with_playbooks_only"
+                },
+                "sidebar": {
+                    "description": "Show the view on Sidebar",
+                    "data_type": "boolean",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "default": "",
+                    "order": 6,
+                    "name": "sidebar",
+                    "id": 7,
+                    "param_name": "sidebar"
+                },
+                "dropdown_menu": {
+                    "description": "List the view the dropdown menu",
+                    "data_type": "boolean",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "default": "",
+                    "order": 7,
+                    "name": "dropdown_menu",
+                    "id": 8,
+                    "param_name": "dropdown_menu"
+                },
+                "popup_text": {
+                    "description": "Text which should be displayed in a popup, popup is only displayed when text is defined",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 8,
+                    "name": "popup_text",
+                    "id": 9,
+                    "param_name": "popup_text"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.playbook_tags",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "playbook_tags",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.artifact_labels",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "artifact_labels",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.parameter.artifact_severities",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "artifact_severities",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.parameter.artifact_tags_include",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "artifact_tags_include",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.parameter.artifact_tags_exclude",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "artifact_tags_exclude",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.parameter.sidebar",
+                    "data_type": "boolean",
+                    "contains": [],
+                    "column_name": "sidebar",
+                    "column_order": 5
+                },
+                {
+                    "data_path": "action_result.parameter.dropdown_menu",
+                    "data_type": "boolean",
+                    "contains": [],
+                    "column_name": "dropdown_menu",
+                    "column_order": 6
+                },
+                {
+                    "data_path": "action_result.parameter.popup_text",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "popup_text",
+                    "column_order": 7
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 8
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "custom",
+                "width": 1,
+                "height": 1,
+                "view": "bot_views.display_bot",
+                "title": "Phantoms Bag of Tricks"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "deactivate artifact overview",
+            "identifier": "deactivate_artifact_overview",
+            "description": "Removes the artifact overview",
+            "verbose": "",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "popup_text": {
+                    "description": "Text which should be displayed in a popup, popup is only displayed when text is defined",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "popup_text"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.popup_text",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "popup_text",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "custom",
+                "width": 1,
+                "height": 1,
+                "view": "bot_views.display_bot",
+                "title": "Phantoms Bag of Tricks"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "add view",
+            "identifier": "add_view",
+            "description": "Adds a custom view",
+            "verbose": "This action provides the ability to create custom HTML views.\nThe view can contain any HTML content.\nTo provide the ability of triggering playbooks, the HTML content must contain one or more button elements containing the class 'bot-playbook' the following attributes:\n- soar-playbook-id: repository/playbook_name\n- soar-playbook-scope: all, new or a JSON formatted list of artifact IDs\nFor input playbooks the HTML view can also contain HTML inputs like textboxes, textareas, dropdowns, checkboxes or radiobuttons which must have the class 'bot-value' and the attribute 'playbook-input' which specifies the name of the playbooks input variable. The value of these input elements is provided as input for the specified input playbook.\n\nWhen the 'add view' action is executing with an already existing 'view_name', the concerning view will be updated/overwritten.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "view_name": {
+                    "description": "Uniqe name of the view, is also used as headline",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": true,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "view_name",
+                    "id": 1,
+                    "param_name": "view_name"
+                },
+                "html_content": {
+                    "description": "Content which should be displayed",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "html_content",
+                    "id": 2,
+                    "param_name": "html_content"
+                },
+                "sidebar": {
+                    "description": "Show the view on Sidebar",
+                    "data_type": "boolean",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "sidebar",
+                    "id": 3,
+                    "param_name": "sidebar"
+                },
+                "dropdown_menu": {
+                    "description": "List the view the dropdown menu",
+                    "data_type": "boolean",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "default": "",
+                    "order": 3,
+                    "name": "dropdown_menu",
+                    "id": 4,
+                    "param_name": "dropdown_menu"
+                },
+                "popup_text": {
+                    "description": "Text which should be displayed in a popup, popup is only displayed when text is defined",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 4,
+                    "name": "popup_text",
+                    "id": 5,
+                    "param_name": "popup_text"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.view_name",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "view_name",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.html_content",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "html_content",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.parameter.sidebar",
+                    "data_type": "boolean",
+                    "contains": [],
+                    "column_name": "sidebar",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.parameter.dropdown_menu",
+                    "data_type": "boolean",
+                    "contains": [],
+                    "column_name": "dropdown_menu",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.parameter.popup_text",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "popup_text",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 5
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "custom",
+                "width": 1,
+                "height": 1,
+                "view": "bot_views.display_bot",
+                "title": "Phantoms Bag of Tricks"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "remove view",
+            "identifier": "remove_view",
+            "description": "Removes a view by its name",
+            "verbose": "",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "view_name": {
+                    "description": "Name of the view which should be removed",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "view_name"
+                },
+                "popup_text": {
+                    "description": "Text which should be displayed in a popup, popup is only displayed when text is defined",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "popup_text"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.view_name",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "view_name",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.popup_text",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "popup_text",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "custom",
+                "width": 1,
+                "height": 1,
+                "view": "bot_views.display_bot",
+                "title": "Phantoms Bag of Tricks"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "reload view",
+            "identifier": "reload_view",
+            "description": "Reload a view by its name",
+            "verbose": "The 'reload view' action forces a reload of an already displayed view. The reload also happens when the inputs of the view are already filled out.\nAs by all actions of this app, updates are only triggered in a scheduled manner or when a widget reload is triggered by an action run, there can be a delay between the action execution and the actual reload of the view.\nUse this action wisely.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "view_name": {
+                    "description": "Name of the view which should be reloaded. To trigger a reload of the artifact summary use 'Artifact Summary' as name.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "view_name"
+                },
+                "popup_text": {
+                    "description": "Text which should be displayed in a popup, popup is only displayed when text is defined",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "popup_text"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.view_name",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "view_name",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.popup_text",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "popup_text",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "custom",
+                "width": 1,
+                "height": 1,
+                "view": "bot_views.display_bot",
+                "title": "Phantoms Bag of Tricks"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "show popup",
+            "identifier": "show_popup",
+            "description": "Shows a popup message",
+            "verbose": "The 'show popup' action displays a popup message in the top right corner, like approver tasks do. The popups triggered by this action can also open a overlay view on click.\nAs by all actions of this app, updates are only triggered in a scheduled manner or when a widget reload is triggered by an action run, there can be a delay between the action execution and the popup is displayed.\nPopups only are shown when the event is open during the action execution unless enforce_popup is true.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "popup_text": {
+                    "description": "Text which should be shown in the popup.",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "popup_text",
+                    "id": 1,
+                    "param_name": "popup_text"
+                },
+                "view_name": {
+                    "description": "Optional view name which should be opened when the popup is clicked.",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "view_name",
+                    "id": 2,
+                    "param_name": "view_name"
+                },
+                "enforce_popup": {
+                    "description": "Show the popup each time the event is opened - use this wisely",
+                    "data_type": "boolean",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "enforce_popup",
+                    "id": 3,
+                    "param_name": "enforce_popup"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.popup_text",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "popup_text",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.view_name",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "view_name",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.parameter.enforce_popup",
+                    "data_type": "boolean",
+                    "contains": [],
+                    "column_name": "enforce_popup",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "custom",
+                "width": 1,
+                "height": 1,
+                "view": "bot_views.display_bot",
+                "title": "Phantoms Bag of Tricks"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "add playbooks",
+            "identifier": "add_playbooks",
+            "description": "Adds automation playbooks to drop down menu",
+            "verbose": "The 'add playbooks' action adds automation playbooks to the drop-down menu. These playbooks can be executed by a single click on the menu button.\nWhen the sidebar parameter is true, these playbooks are also displayed in the sidebar.",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "playbooks": {
+                    "description": "JSON list of playbooks, each playbook must be formatted as 'repo/playbookname'",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "playbooks",
+                    "id": 1,
+                    "param_name": "playbooks"
+                },
+                "scope": {
+                    "description": "Scope where the playbook should be executed (new or all)",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [
+                        "new",
+                        "all"
+                    ],
+                    "default": "new",
+                    "order": 1,
+                    "name": "scope",
+                    "id": 2,
+                    "param_name": "scope"
+                },
+                "sidebar": {
+                    "description": "Show this playbook in sidebar",
+                    "data_type": "boolean",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "default": "",
+                    "order": 2,
+                    "name": "sidebar",
+                    "id": 3,
+                    "param_name": "sidebar"
+                },
+                "popup_text": {
+                    "description": "Text which should be displayed in a popup, popup is only displayed when text is defined",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 3,
+                    "name": "popup_text",
+                    "id": 4,
+                    "param_name": "popup_text"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.playbooks",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "playbooks",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.scope",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "scope",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.parameter.sidebar",
+                    "data_type": "boolean",
+                    "contains": [],
+                    "column_name": "sidebar",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.parameter.popup_text",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "popup_text",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "custom",
+                "width": 1,
+                "height": 1,
+                "view": "bot_views.display_bot",
+                "title": "Phantoms Bag of Tricks"
+            },
+            "versions": "EQ(*)"
+        },
+        {
+            "action": "remove playbooks",
+            "identifier": "remove_playbooks",
+            "description": "Removes playbooks from the drop-down menu",
+            "verbose": "",
+            "type": "generic",
+            "read_only": false,
+            "parameters": {
+                "playbooks": {
+                    "description": "JSON list of playbooks to remove, each playbook must be formatted as 'repo/playbookname'",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 0,
+                    "name": "playbooks",
+                    "id": 1,
+                    "param_name": "playbooks"
+                },
+                "popup_text": {
+                    "description": "Text which should be displayed in a popup, popup is only displayed when text is defined",
+                    "data_type": "string",
+                    "required": false,
+                    "primary": false,
+                    "contains": [],
+                    "value_list": [],
+                    "default": "",
+                    "order": 1,
+                    "name": "popup_text",
+                    "id": 2,
+                    "param_name": "popup_text"
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.playbooks",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "playbooks",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.popup_text",
+                    "data_type": "string",
+                    "contains": [],
+                    "column_name": "popup_text",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                }
+            ],
+            "render": {
+                "type": "custom",
+                "width": 1,
+                "height": 1,
+                "view": "bot_views.display_bot",
+                "title": "Phantoms Bag of Tricks"
+            },
+            "versions": "EQ(*)"
+        }
+    ],
+    "copied_from_id": 406,
+    "copied_from_version": "4.1.0",
+    "directory": "phantomsbagoftricks_94618742-96f3-4d28-8c8d-0624431248da",
+    "version": 1,
+    "appname": "-",
+    "executable": "spawn3",
+    "disabled": false,
+    "custom_made": true
+}
